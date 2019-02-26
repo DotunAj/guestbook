@@ -2,21 +2,20 @@
     <img src="assets/ace.png" width="50px;height:auto;" />
     <h1 style="margin-bottom: 0">View all Guests</h1>
     <div class="ui divided items">
+        {{#each guests}}
         <div class="item">
             <div class="content">
-                <a class="header">Abati "Ace" Adewale</a>
+                <a class="header">{{this.name}}</a>
                 <div class="meta">
-                    <span class="cinema">acekyd01@gmail.com</span>
+                    <span class="cinema">{{this.email}}</span>
                 </div>
                 <div class="description">
                     <p>
-                        Semi-Genius. Gamer. Full Stack Developer. Co-host
-                        @mintpodcast. Knowledge Seeker. Cavs 🏀. Marvel #MCU. Ace ♠
-                        Developer.
+                        {{this.comment}}
                     </p>
                 </div>
                 <div class="extra">
-                    <a href="edit.html">
+                    <a href="/guests/edit/{{this.id}}">
                         <button class="mini ui button">
                             Edit
                         </button>
@@ -28,58 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="item">
-            <div class="content">
-                <a class="header">Abati "Ace" Adewale</a>
-                <div class="meta">
-                    <span class="cinema">acekyd01@gmail.com</span>
-                </div>
-                <div class="description">
-                    <p>
-                        Semi-Genius. Gamer. Full Stack Developer. Co-host
-                        @mintpodcast. Knowledge Seeker. Cavs 🏀. Marvel #MCU. Ace ♠
-                        Developer.
-                    </p>
-                </div>
-                <div class="extra">
-                    <a href="edit.html">
-                        <button class="mini ui button">
-                            Edit
-                        </button>
-                    </a>
-                    <div class="ui right floated delete negative button">
-                        Delete Entry
-                        <i class="right trash outline icon"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="content">
-                <a class="header">Abati "Ace" Adewale</a>
-                <div class="meta">
-                    <span class="cinema">acekyd01@gmail.com</span>
-                </div>
-                <div class="description">
-                    <p>
-                        Semi-Genius. Gamer. Full Stack Developer. Co-host
-                        @mintpodcast. Knowledge Seeker. Cavs 🏀. Marvel #MCU. Ace ♠
-                        Developer.
-                    </p>
-                </div>
-                <div class="extra">
-                    <a href="edit.html">
-                        <button class="mini ui button">
-                            Edit
-                        </button>
-                    </a>
-                    <div class="ui right floated delete negative button">
-                        Delete Entry
-                        <i class="right trash outline icon"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{/each}}
     </div>
 </div>
 </div>
@@ -96,14 +44,22 @@
             No
         </div>
         <div class="ui positive right labeled icon button">
-            Yes
+            <a href="/guest/{{guest.id}}">Yes</a>
             <i class="checkmark icon"></i>
         </div>
     </div>
 </div>
 </body>
 <script type="text/javascript">
-    $(".small.modal").modal("attach events", ".delete.button", "show");
+    $(".small.modal").modal("attach events", ".delete.button", "show").modal({
+        closable: true,
+        onDeny: function () {
+            window.alert('Wait not yet!');
+        },
+        onApprove: function () {
+            window.alert('Approved!');
+        }
+    });
 </script>
 
 </html>

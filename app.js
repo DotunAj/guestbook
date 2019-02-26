@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const exphbs = require("express-handlebars");
+const db = require("./db/guests");
 
 const app = express();
 
@@ -16,10 +17,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Render Index page
-app.get("/", (req, res) => res.render("index"));
+app.get("/", (req, res) =>
+  res.render("index", {
+    helpers: {
+      activeHome: "active",
+      activeView: ""
+    }
+  })
+);
 
-// Render View page
-app.get("/view.html", (req, res) => res.render("view"));
+//Guest routes
+app.use("/guests", require("./routes/guests"));
 
 // Start server
 const PORT = process.env.PORT || 5000;
